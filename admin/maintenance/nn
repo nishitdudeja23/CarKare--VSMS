@@ -1,0 +1,237 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+int countAndDeleteOccurrences(struct Node* head, int key) {
+    struct Node* temp = head;
+    struct Node* prev = NULL;
+    int count = 0;
+
+    while (head != NULL && head->data == key) {
+        temp = head;
+        head = head->next;
+        free(temp);
+        temp = head;
+        count++;
+    }
+
+    while (temp != NULL) {
+        while (temp != NULL && temp->data != key) {
+            prev = temp;
+            temp = temp->next;
+        }
+        if (temp == NULL) break;
+        prev->next = temp->next;
+        free(temp);
+        temp = prev->next;
+        count++;
+    }
+
+    return count;
+}
+
+void printList(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d->", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+
+// Main function
+int main() {
+   
+    struct Node* head = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* second = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* third = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* fourth = (struct Node*)malloc(sizeof(struct Node));
+
+    head->data = 1;
+    head->next = second;
+
+    second->data = 2;
+    second->next = third;
+
+    third->data = 3;
+    third->next = fourth;
+
+    fourth->data = 2;
+    fourth->next = NULL;
+
+    printf("Original List: ");
+    printList(head);
+
+    int key = 2;
+    int count = countAndDeleteOccurrences(head, key);
+    printf("Number of occurrences of %d: %d\n", key, count);
+
+    printf("List after deleting occurrences of %d: ", key);
+    printList(head);
+
+
+    return 0;
+}
+
+#include<stdio.h>
+#include<stdlib.h>
+
+
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* reverseList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* next = NULL;
+    while (current != NULL) {
+        next = current->next;   
+        current->next = prev;  
+        prev = current;         
+        current = next;
+    }
+    head = prev;
+    return head;
+}
+
+void printList(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d->", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+
+// Main function
+int main() {
+   
+    struct Node* head = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* second = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* third = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* fourth = (struct Node*)malloc(sizeof(struct Node));
+
+    head->data = 1;
+    head->next = second;
+
+    second->data = 2;
+    second->next = third;
+
+    third->data = 3;
+    third->next = fourth;
+
+    fourth->data = 2;
+    fourth->next = NULL;
+
+    printf("Original List: ");
+    printList(head);
+
+
+
+    head = reverseList(head);
+    printf("Reversed List: ");
+    printList(head);
+  
+   
+    
+    return 0;
+}
+#include<stdio.h>
+#include<stdlib.h>
+
+
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* findMiddle(struct Node* head) {
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+void printList(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d->", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+
+// Main function
+int main() {
+   
+    struct Node* head = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* second = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* third = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* fourth = (struct Node*)malloc(sizeof(struct Node));
+
+    head->data = 1;
+    head->next = second;
+
+    second->data = 2;
+    second->next = third;
+
+    third->data = 3;
+    third->next = fourth;
+
+    fourth->data = 2;
+    fourth->next = NULL;
+
+    printf("Original List: ");
+    printList(head);
+
+    struct Node* middle = findMiddle(head);
+    if (middle != NULL) {
+        printf("Middle of the list: %d\n", middle->data);
+    } else {
+        printf("The list is empty.\n");
+    }
+    
+    return 0;
+}
+struct Node* reverseList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* next = NULL;
+    while (current != NULL) {
+        next = current->next;   
+        current->next = prev;  
+        prev = current;         
+        current = next;
+    }
+    head = prev;
+    return head;
+}
+struct Node* findMiddle(struct Node* head) {
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
